@@ -1,0 +1,66 @@
+homebrew_upgrade_all_packages: yes
+homebrew_taps:
+  - homebrew/core
+  - homebrew/cask
+  - buo/cask-upgrade
+  - cloudflare/cloudflare
+homebrew_cask_apps:
+  - 1password
+  - atom
+  - authy
+  - debookee
+  - docker
+  - google-chrome
+  - google-cloud-sdk
+  - istat-menus
+  - postman
+  - slack
+  - vagrant
+  - wireshark
+homebrew_installed_packages:
+  - ack
+  - ansible
+  - ansible-lint
+  - antigen
+  - awscli
+  - cloudflared
+  - cowsay
+  - dep
+  - dnstop
+  - fabric
+  - glances
+  - go
+  - google-go
+  - godep
+  - httping
+  - iperf
+  - iperf3
+  - jq
+  - kops
+  - kompose
+  - kubetail
+  - kubectx
+  - kubernetes-cli
+  - kubernetes-helm
+  - mtr
+  - nload
+  - nmap
+  - openssl
+  - openssl@1.1
+  - p7zip
+  - pv
+  - pwgen
+  - readline
+  - ssh-copy-id
+  - terraform
+  - warp
+  - watch
+  - wget
+  - wrk
+  - zsh
+  - zsh-autosuggestions
+  - zsh-completions
+  - zsh-git-prompt
+  - zsh-history-substring-search
+  - zsh-syntax-highlighting
+homebrew_upgrade_all_packages: yes

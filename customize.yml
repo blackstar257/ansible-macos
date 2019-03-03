@@ -1,0 +1,12 @@
+- hosts: localhost
+  vars_prompt:
+    - name: "ansible_become_pass"
+      prompt: "Enter your local user password"
+      private: yes
+  tasks:
+    - name: OSX Screenhots Location
+      shell: defaults write com.apple.screencapture location ~/Documents/Screenshots
+    - name: Setup Templates zshrc
+      template:
+        src: ".zshrc.j2"
+        dest: "~/.zshrc"

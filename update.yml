@@ -1,0 +1,18 @@
+- hosts: localhost
+  vars_files:
+    - vars.yml
+  vars_prompt:
+    - name: "ansible_become_pass"
+      prompt: "Enter your local user password"
+      private: yes
+  roles:
+    - { role: geerlingguy.homebrew }
+  tasks:
+    - name: Upgrade ZSH
+      shell: export ZSH=$ZSH /bin/sh $ZSH/tools/upgrade.sh
+    - name: Update APM (Atom Package Manager)
+      shell: apm update -c false
+    - name: Homebrew Cleanup
+      shell: brew cleanup
+    - name: Update OSX
+      shell: softwareupdate -i -a

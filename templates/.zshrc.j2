@@ -1,0 +1,65 @@
+source /usr/local/share/antigen/antigen.zsh
+
+autoload -Uz compinit
+if [ $(date +'%j') != $(stat -f '%Sm' -t '%j' ~/.zcompdump) ]; then
+  compinit
+else
+  compinit -C
+fi
+
+source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'
+source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc'
+
+fpath=(/usr/local/share/zsh-completions $fpath)
+
+antigen use oh-my-zsh
+
+antigen bundle <<EOBUNDLES
+
+vi-mode
+git
+git-extras
+docker
+git-flow
+
+# git-flow-avh
+# bundler
+
+brew
+aws
+fabric
+helm
+kubectl
+go
+
+# More tools
+vagrant
+tmux
+
+#jimhester/per-directory-history
+colored-man-pages
+gnu-utils
+history
+rbenv
+
+
+zsh-users/zsh-autosuggestions
+zsh-users/zsh-completions
+zsh-users/zsh-syntax-highlighting
+
+
+EOBUNDLES
+
+antigen theme daveverwer
+
+antigen apply
+
+alias gen="date +%s | shasum -a 256 | base64 | head -c 32 ; echo"
+alias wa="watch -t -n1"
+alias tf="terraform"
+alias del="kubectl delete pod -n atd --grace-period=0 --force"
+
+export ANSIBLE_HOST_KEY_CHECKING=False
+export PATH="/usr/local/sbin:$PATH"
+export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
+export PATH="$GOPATH/bin:$PATH"
