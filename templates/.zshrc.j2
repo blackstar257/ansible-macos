@@ -1,3 +1,4 @@
+export TERM="xterm-256color"
 source /usr/local/share/antigen/antigen.zsh
 
 autoload -Uz compinit
@@ -10,56 +11,128 @@ fi
 source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'
 source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc'
 
+source <(helm completion zsh | sed -E 's/\["(.+)"\]/\[\1\]/g')
+
 fpath=(/usr/local/share/zsh-completions $fpath)
+# ORDER
+SPACESHIP_PROMPT_ORDER=(
+  time     #
+  vi_mode  # these sections will be
+  user     # before prompt char
+  host     #
+  char
+  dir
+  git
+  node
+  ruby
+  xcode
+  swift
+  golang
+  docker
+  venv
+  pyenv
+)
 
+# USER
+SPACESHIP_USER_PREFIX="" # remove `with` before username
+SPACESHIP_USER_SUFFIX="" # remove space before host
+
+# HOST
+# Result will look like this:
+#   username@:(hostname)
+SPACESHIP_HOST_PREFIX="@:("
+SPACESHIP_HOST_SUFFIX=") "
+
+# DIR
+SPACESHIP_DIR_PREFIX='' # disable directory prefix, cause it's not the first section
+SPACESHIP_DIR_TRUNC='1' # show only last directory
+
+# GIT
+# Disable git symbol
+SPACESHIP_GIT_SYMBOL="" # disable git prefix
+SPACESHIP_GIT_BRANCH_PREFIX="" # disable branch prefix too
+# Wrap git in `git:(...)`
+SPACESHIP_GIT_PREFIX='git:('
+SPACESHIP_GIT_SUFFIX=") "
+SPACESHIP_GIT_BRANCH_SUFFIX="" # remove space after branch name
+# Unwrap git status from `[...]`
+SPACESHIP_GIT_STATUS_PREFIX=""
+SPACESHIP_GIT_STATUS_SUFFIX=""
+
+# NODE
+SPACESHIP_NODE_PREFIX="node:("
+SPACESHIP_NODE_SUFFIX=") "
+SPACESHIP_NODE_SYMBOL=""
+
+# RUBY
+SPACESHIP_RUBY_PREFIX="ruby:("
+SPACESHIP_RUBY_SUFFIX=") "
+SPACESHIP_RUBY_SYMBOL=""
+
+# XCODE
+SPACESHIP_XCODE_PREFIX="xcode:("
+SPACESHIP_XCODE_SUFFIX=") "
+SPACESHIP_XCODE_SYMBOL=""
+
+# SWIFT
+SPACESHIP_SWIFT_PREFIX="swift:("
+SPACESHIP_SWIFT_SUFFIX=") "
+SPACESHIP_SWIFT_SYMBOL=""
+
+# GOLANG
+SPACESHIP_GOLANG_PREFIX="go:("
+SPACESHIP_GOLANG_SUFFIX=") "
+SPACESHIP_GOLANG_SYMBOL=""
+
+# DOCKER
+SPACESHIP_DOCKER_PREFIX="docker:("
+SPACESHIP_DOCKER_SUFFIX=") "
+SPACESHIP_DOCKER_SYMBOL=""
+
+# VENV
+SPACESHIP_VENV_PREFIX="venv:("
+SPACESHIP_VENV_SUFFIX=") "
+
+# PYENV
+SPACESHIP_PYENV_PREFIX="python:("
+SPACESHIP_PYENV_SUFFIX=") "
+SPACESHIP_PYENV_SYMBOL=""
 antigen use oh-my-zsh
-
 antigen bundle <<EOBUNDLES
-
 vi-mode
 git
 git-extras
 docker
 git-flow
-
-# git-flow-avh
-# bundler
-
 brew
 aws
 fabric
 helm
 kubectl
 go
-
-# More tools
 vagrant
 tmux
-
-#jimhester/per-directory-history
 colored-man-pages
 gnu-utils
 history
 rbenv
-
-
-zsh-users/zsh-autosuggestions
-zsh-users/zsh-completions
-zsh-users/zsh-syntax-highlighting
-
-
 EOBUNDLES
-
-antigen theme daveverwer
-
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen theme https://github.com/denysdovhan/spaceship-prompt spaceship
 antigen apply
 
-alias gen="date +%s | shasum -a 256 | base64 | head -c 32 ; echo"
-alias wa="watch -t -n1"
-alias tf="terraform"
-alias del="kubectl delete pod -n atd --grace-period=0 --force"
+alias gen='dd if=/dev/urandom bs=1 count=32 2>/dev/null | base64 | rev | cut -b 2- | rev'
+alias wa='watch -t -n 0.5'
+alias tf='terraform'
+alias gk='gcloud container clusters get-credentials $(gcloud container clusters list --format=json | jq -r ".[0].name") -z $(gcloud container clusters list --format=json | jq -r ".[0].zone")'
+alias gup='find . -type d  -maxdepth 2 -name .git -execdir sh -c "pwd && git pull" \;'
+alias guf='find . -type d  -maxdepth 2 -name .git -execdir sh -c "pwd && git fetch" \;'
+alias gs='find . -type d  -maxdepth 2 -name .git -execdir sh -c "pwd && git status" \;'
+alias ggc='find . -type d  -maxdepth 2 -name .git -execdir sh -c "pwd && git gc" \;'
+alias gc='find . -type d  -maxdepth 2 -name .git -execdir sh -c "pwd && git clean -xdf" \;'
+alias cm='kubectl get --raw "/apis/external.metrics.k8s.io/v1beta1" | jq'
+alias sha256sum='shasum -a 256'
 
-export ANSIBLE_HOST_KEY_CHECKING=False
-export PATH="/usr/local/sbin:$PATH"
-export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
-export PATH="$GOPATH/bin:$PATH"
+wh () {
+  while true; do date ; $@ ; sleep 1; done
+}

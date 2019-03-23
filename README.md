@@ -1,15 +1,9 @@
-# Ansible OSX
+# MacOS
 
-Developer Operation Streamline Repo
+Apple Macbook Ansible Setup
 
-### Dependencies
+### Run
 
-* OSX initialize
 ```sh
 make
-```
-
-```sh
-find . -type f -d 1 -exec 7z a {}-$( date "+%m%d%H%M%Y%S").7z {} \;
-find . -type d -d 1 -exec 7z a {}-$( date "+%m%d%H%M%Y%S").7z {} \;
 ```

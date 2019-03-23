@@ -1,4 +1,6 @@
 homebrew_upgrade_all_packages: yes
+homebrew_cask_accept_external_apps: true
+homebrew_clear_cache: true
 homebrew_taps:
   - homebrew/core
   - homebrew/cask
@@ -6,34 +8,39 @@ homebrew_taps:
   - cloudflare/cloudflare
 homebrew_cask_apps:
   - 1password
-  - atom
-  - authy
+  - airtool
+  - angry-ip-scanner
   - debookee
   - docker
   - google-chrome
   - google-cloud-sdk
+  - intellij-idea
   - istat-menus
+  - keepingyouawake
+  - phpstorm
   - postman
   - slack
   - vagrant
+  - virtualbox
+  - viscosity
+  - visual-studio-code
   - wireshark
 homebrew_installed_packages:
   - ack
   - ansible
   - ansible-lint
   - antigen
+  - aws-iam-authenticator
   - awscli
+  - circleci
   - cloudflared
-  - cowsay
   - dep
   - dnstop
   - fabric
   - glances
   - go
-  - google-go
-  - godep
   - httping
-  - iperf
+  - iftop
   - iperf3
   - jq
   - kops
@@ -45,18 +52,16 @@ homebrew_installed_packages:
   - mtr
   - nload
   - nmap
-  - openssl
-  - openssl@1.1
-  - p7zip
-  - pv
   - pwgen
-  - readline
+  - rsync
   - ssh-copy-id
   - terraform
-  - warp
+  - terragrunt
+  - tree
   - watch
   - wget
   - wrk
+  - yarn
   - zsh
   - zsh-autosuggestions
   - zsh-completions
