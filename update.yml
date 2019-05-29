@@ -10,7 +10,5 @@
   tasks:
     - name: Upgrade ZSH
       shell: export ZSH=$ZSH /bin/sh $ZSH/tools/upgrade.sh
-    - name: Homebrew Cleanup
-      shell: brew cleanup
     - name: Update OSX
       shell: softwareupdate -i -a

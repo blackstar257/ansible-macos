@@ -53,9 +53,11 @@ homebrew_installed_packages:
   - nload
   - nmap
   - pwgen
+  - packer
   - rsync
   - ssh-copy-id
   - terraform
+  - terraform@0.11
   - terragrunt
   - tree
   - watch
@@ -68,4 +70,3 @@ homebrew_installed_packages:
   - zsh-git-prompt
   - zsh-history-substring-search
   - zsh-syntax-highlighting
-homebrew_upgrade_all_packages: yes
