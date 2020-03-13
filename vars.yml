@@ -14,15 +14,11 @@ homebrew_cask_apps:
   - docker
   - google-chrome
   - google-cloud-sdk
-  - intellij-idea
   - istat-menus
-  - keepingyouawake
-  - phpstorm
   - postman
   - slack
   - vagrant
   - virtualbox
-  - viscosity
   - visual-studio-code
   - wireshark
 homebrew_installed_packages:
